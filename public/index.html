@@ -26,6 +26,8 @@
                     <form id="taskForm">
                         <input type="text" class="form-control mb-3" id="task">
                         <button type="submit" class="btn btn-primary w-100 mb-3">add</button>
+                        
+                    
                     </form>
                 </div>
                 <!-- Contenedor de tareas -->
@@ -86,8 +88,7 @@
                     <p>${task.description}</p>
                     <button class="btn btn-outline-danger btn-sm"
                     onclick="deleteTask(${task.id})">Eliminar</button>
-                    <button onclick="toggleComplete(${task.id}, ${task.completed})" class="btn btn-primary">${task.completed ? 'Deshacer' : 'Completada'}</button>
-
+                    <button onclick="toggleComplete(${task.id}, ${task.completed})" class="btn btn-primary btn-sm">${task.completed ? 'Deshacer' : 'Completar'}</button>
                 `
                 cardTask.append(cardBodyTask);
                 document.getElementById('tasks-container').append(cardTask);
@@ -100,6 +101,22 @@
                 alert('Tarea eliminada correctamente');
             }else{
                 alert('No ha sido posible eliminar la tarea');
+            }
+            getTasks();
+        }
+
+        //Función para cambiar el estado a la tarea
+        async function toggleComplete(id, completed){
+            console.log(id, completed);
+            const response = await fetch(`/api/tasks/${id}`, {
+                method: 'PUT',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({ completed: !completed })
+            });
+            if(response.ok){
+                console.log('Tarea modificada correctamente');
+            }else{
+                console.log('No ha sido posible modificar la tarea');
             }
             getTasks();
         }
