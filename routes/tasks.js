@@ -53,6 +53,19 @@ router.delete('/:id', (req, res) =>{
     })
 })
 
+router.put('/:id', (req, res) => {
+    const id = req.params.id;
+    const completed = req.body.completed;
+    console.log(id, completed)
+    db.run('UPDATE tasks SET completed = ? WHERE id = ?',
+        [completed ? 1 : 0, id], function (error) {
+            if (error) {
+                res.status(500).json({ error: "Error al modificar la tarea" });
+                return;
+            }
+            res.status(200).json({ message: "Tarea modificada correctamente" });
+        })
+})
 
 
 export default router;
