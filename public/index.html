@@ -85,7 +85,7 @@
                 const cardBodyTask = document.createElement('div');
                 cardBodyTask.className = 'card-body';
                 cardBodyTask.innerHTML = `
-                    <p>${task.description}</p>
+                    <p>${task.completed ? `<s>${task.description}</s>` : task.description}</p>
                     <button class="btn btn-outline-danger btn-sm"
                     onclick="deleteTask(${task.id})">Eliminar</button>
                     <button onclick="toggleComplete(${task.id}, ${task.completed})" class="btn btn-primary btn-sm">${task.completed ? 'Deshacer' : 'Completar'}</button>
