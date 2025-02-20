@@ -86,6 +86,8 @@
                     <p>${task.description}</p>
                     <button class="btn btn-outline-danger btn-sm"
                     onclick="deleteTask(${task.id})">Eliminar</button>
+                    <button onclick="toggleComplete(${task.id}, ${task.completed})" class="btn btn-primary">${task.completed ? 'Deshacer' : 'Completada'}</button>
+
                 `
                 cardTask.append(cardBodyTask);
                 document.getElementById('tasks-container').append(cardTask);
